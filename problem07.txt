@@ -1,0 +1,12 @@
+To fetch the student_name and class_name for each student using an INNER JOIN, the query would be:
+SELECT s.student_id, s.student_name, c.class_name
+FROM Students s
+INNER JOIN Classes c ON s.class_id = c.class_id;
+This query joins the Students and Classes tables on the class_id column, allowing us to retrieve the student name and class name for each student record.
+The key steps are:
+
+Select the relevant columns from the Students (student_id, student_name) and Classes (class_name) tables.
+Use the INNER JOIN clause to connect the two tables based on the shared class_id column.
+This will return only the matching records where there is a corresponding entry in both the Students and Classes tables.
+
+The result will be a table with the student ID, student name, and class name for each student.

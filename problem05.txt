@@ -1,0 +1,58 @@
+### Consequences of Violating Constraints
+
+When you attempt to **insert**, **update**, or **delete** data that violates a constraint in a database, several consequences may occur:
+
+1. **Data Integrity Loss**: Violating constraints can lead to inconsistent or incorrect data. For example, if you try to insert an employee with a negative salary value while the salary column has a `CHECK` constraint requiring positive values, the database would accept invalid data if there were no constraint. This would undermine the reliability of the data.
+
+2. **Transaction Failure**: The database will reject the operation (insert, update, delete) and prevent it from being executed. The transaction will fail, and no changes will be made to the database for that operation. This is the most common outcome when a constraint is violated.
+
+3. **Error Message Generation**: When a constraint violation occurs, the database will generate an error message to inform the user that the operation was unsuccessful. The error message will typically explain which constraint was violated.
+
+4. **Rollbacks**: If the operation is part of a larger transaction, the entire transaction may be rolled back. This means that none of the changes made during the transaction will be saved, and the database will revert to its previous state.
+
+### Example of Errors When Violating Constraints
+
+1. **Violation of `NOT NULL` Constraint**:
+   - If you try to insert a record into a table where a `NOT NULL` constraint is defined for a column, and you provide a `NULL` value for that column, the database will reject the operation.
+   
+   **Error Message** (for MySQL, PostgreSQL, or SQL Server):
+   ```plaintext
+   ERROR 1048 (23000): Column 'emp_name' cannot be null
+   ```
+   Explanation: You are trying to insert a `NULL` value into the `emp_name` column, which is not allowed because it has a `NOT NULL` constraint.
+
+2. **Violation of `PRIMARY KEY` Constraint**:
+   - If you try to insert a record with a duplicate value in a column that is a primary key (which must be unique), the database will reject it.
+
+   **Error Message**:
+   ```plaintext
+   ERROR 1062 (23000): Duplicate entry '123' for key 'PRIMARY'
+   ```
+   Explanation: You are trying to insert a new record with an `emp_id` of `123`, but the `emp_id` column is a primary key, and the value `123` already exists.
+
+3. **Violation of `UNIQUE` Constraint**:
+   - If you attempt to insert a duplicate value into a column defined with a `UNIQUE` constraint, the database will reject the insertion.
+   
+   **Error Message**:
+   ```plaintext
+   ERROR 1062 (23000): Duplicate entry 'john.doe@example.com' for key 'unique_email'
+   ```
+   Explanation: You are trying to insert a record with the email `john.doe@example.com`, but this email already exists in the `email` column, which has a `UNIQUE` constraint.
+
+4. **Violation of `CHECK` Constraint**:
+   - If you insert or update data that doesn't meet the conditions of a `CHECK` constraint (e.g., trying to enter a negative salary in a column that only allows positive values), the database will reject the operation.
+
+   **Error Message**:
+   ```plaintext
+   ERROR: check constraint "salary_check" is violated by some row
+   ```
+   Explanation: You are trying to insert a negative value for `salary`, but the `CHECK` constraint ensures that `salary` must be greater than 0.
+
+5. **Violation of `FOREIGN KEY` Constraint**:
+   - If you try to insert a record that references a non-existent value in another table (violating the foreign key constraint), the operation will fail.
+
+   **Error Message** (for MySQL, PostgreSQL, or SQL Server):
+   ```plaintext
+   ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`employees`, CONSTRAINT `fk_department_id` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`))
+   ```
+   Explanation: You are trying to insert an employee with a `department_id` that doesn't exist in the `departments` table, violating the foreign key constraint.

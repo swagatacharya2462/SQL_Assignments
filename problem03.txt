@@ -1,0 +1,21 @@
+### Why Apply the `NOT NULL` Constraint to a Column?
+
+The `NOT NULL` constraint is applied to a column to ensure that it **always contains a value**. This is important when a column must have meaningful data for the database to function correctly. By applying `NOT NULL`, you prevent users from leaving the column empty (i.e., NULL), ensuring that critical data is always provided.
+
+#### Reasons to Apply the `NOT NULL` Constraint:
+1. **Ensures Complete Data**: For columns that are essential to the record, like `emp_name` or `emp_id`, applying `NOT NULL` ensures that every record has a valid value for these columns.
+2. **Data Integrity**: Without the `NOT NULL` constraint, some rows might contain missing values, which can lead to problems in calculations, data analysis, or relationships with other tables.
+3. **Business Rules**: In many cases, business rules dictate that certain information (such as an employee's name, age, or ID) is mandatory. For example, you can't have a record for an employee without a name.
+
+### Can a Primary Key Contain NULL Values?
+
+No, a **primary key** cannot contain `NULL` values. 
+
+#### Justification:
+1. **Uniqueness**: The primary key must **uniquely identify** each record in a table. If a primary key column allowed `NULL` values, it would violate this requirement. Since `NULL` is not a specific value, it cannot be used to uniquely identify a record. For example, two records could both have `NULL` in a primary key column, which would make them indistinguishable.
+   
+2. **Non-null Requirement**: By definition, a primary key must always have a value, and that value must be **unique** and **not NULL**. This ensures that every row in the table can be uniquely accessed or referenced.
+   
+In summary:
+- The `NOT NULL` constraint is used to ensure that a column always contains data, preventing empty values.
+- A primary key **cannot** contain `NULL` values because its purpose is to uniquely identify each row, and `NULL` values do not meet the uniqueness requirement.

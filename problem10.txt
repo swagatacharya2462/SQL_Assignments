@@ -1,0 +1,16 @@
+To display the order_id, customer_name, and the quantity of products ordered by each customer using an INNER JOIN between the three tables, the query would be:
+
+SELECT 
+    o.order_id,
+    c.customer_name,
+    od.quantity
+FROM Orders o
+INNER JOIN Customers c ON o.customer_id = c.customer_id
+INNER JOIN Order_Details od ON o.order_id = od.order_id;
+
+This query:
+
+1. Selects the order_id, customer_name, and quantity columns.
+2. Joins the Orders, Customers, and Order_Details tables using INNER JOIN to connect the relevant data.
+3. Matches the customer_id from the Orders table to the customer_id in the Customers table.
+4. Matches the order_id from the Orders table to the order_id in the Order_Details table.

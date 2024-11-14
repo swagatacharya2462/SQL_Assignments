@@ -1,0 +1,20 @@
+To find the total sales amount for each product using an INNER JOIN and the SUM() function, the query would be:
+
+SELECT p.product_name, SUM(s.amount) AS total_sales
+FROM Sales s 
+INNER JOIN Products p ON s.product_id = p.product_id
+GROUP BY p.product_name;
+
+This query:
+
+1. Joins the Sales and Products tables on the product_id column to connect the sales data with the product information.
+
+2. Selects the product_name column from the Products table and calculates the SUM() of the amount column from the Sales table.
+
+3. Groups the results by the product_name to get the total sales for each product.
+
+The key steps are:
+
+- Use INNER JOIN to only include sales data that has a matching product.
+- Apply the SUM() function to the amount column to calculate the total sales for each product.
+- Group the results by product_name to get the total for each product.

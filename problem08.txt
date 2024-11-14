@@ -1,0 +1,17 @@
+To retrieve all order_id, customer_name, and product_name even for products not associated with an order, the query would be:
+
+SELECT 
+    o.order_id,
+    c.customer_name,
+    p.product_name
+FROM Orders o
+FULL OUTER JOIN Customers c ON o.customer_id = c.customer_id  
+FULL OUTER JOIN Products p ON o.order_id = p.order_id;
+
+The key points are:
+
+1. Use a FULL OUTER JOIN to connect the Orders, Customers, and Products tables. This ensures we get all records from each table, even if there are no matching records in the other tables.
+
+2. Select the order_id, customer_name, and product_name columns to get the desired information.
+
+3. The FULL OUTER JOIN allows us to retrieve all customer names and product names, even for those not associated with any orders.

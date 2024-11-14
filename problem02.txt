@@ -1,0 +1,59 @@
+Purpose of Constraints in a Database -->
+Constraints are like rules for the data in a database. They make sure that the data is correct and consistent. Without these rules, the data could be messy or incorrect, which could lead to problems later on. Constraints help to protect the data and make sure that it follows certain guidelines.
+
+How Constraints Help Maintain Data Integrity
+Prevent Invalid Data: Constraints stop people from entering wrong or meaningless data. For example, if you set a rule that age must be at least 18, the database will reject any age less than 18.
+
+Ensure Uniqueness: Constraints can make sure that certain data, like email addresses or ID numbers, are unique. This helps to avoid duplicates in your database.
+
+Keep Relationships Correct: If one table depends on another (like employees depending on departments), constraints make sure that the relationship is correct and the data stays connected.
+
+Ensure Complete Data: Some columns must always have data. Constraints can stop empty (NULL) values from being entered where they shouldn’t be, ensuring that important information is always present.
+
+Provide Defaults: Constraints can automatically fill in missing information with a default value, so you don’t have to manually enter it every time.
+
+Common Types of Constraints
+NOT NULL:
+
+Ensures a column can’t have an empty (NULL) value.
+Example: emp_name TEXT NOT NULL means every employee must have a name.
+PRIMARY KEY:
+
+Makes sure each record (row) in a table is unique by using a special identifier.
+Example: emp_id INTEGER PRIMARY KEY ensures that each employee has a unique ID.
+UNIQUE:
+
+Ensures that all values in a column are different from each other.
+Example: email TEXT UNIQUE makes sure no two employees have the same email.
+FOREIGN KEY:
+
+Ensures that a value in one table exists in another table, keeping the connection between them correct.
+Example: FOREIGN KEY (department_id) REFERENCES departments(department_id) makes sure the department exists before adding it to an employee.
+CHECK:
+
+Ensures that the values in a column meet a specific condition.
+Example: age INTEGER CHECK (age >= 18) makes sure the employee’s age is at least 18.
+DEFAULT:
+
+Sets a default value for a column if no value is provided.
+Example: salary DECIMAL DEFAULT 30000 means the salary will automatically be set to 30,000 if no salary is provided.
+Example of Constraints in Action:
+sql
+Copy code
+CREATE TABLE employees (
+    emp_id INTEGER PRIMARY KEY,               -- Unique ID for each employee
+    emp_name TEXT NOT NULL,                    -- Employee name can't be empty
+    age INTEGER CHECK (age >= 18),             -- Age must be at least 18
+    email VARCHAR(255) UNIQUE,                 -- Email must be unique
+    department_id INTEGER,                     -- Reference to department
+    salary DECIMAL DEFAULT 30000,              -- Default salary of 30000
+    FOREIGN KEY (department_id) REFERENCES departments(department_id) -- Must match a department
+);
+In this example:
+
+PRIMARY KEY ensures each emp_id is unique.
+NOT NULL ensures every employee has a name.
+CHECK ensures employees are at least 18 years old.
+UNIQUE ensures no two employees share the same email.
+FOREIGN KEY ensures the department_id refers to a valid department in another table.
+DEFAULT ensures employees have a salary of 30,000 if no salary is provided.

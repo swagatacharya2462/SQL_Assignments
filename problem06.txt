@@ -1,0 +1,20 @@
+To modify the `products` table to include the constraints you mentioned (making `product_id` a primary key and setting a default value of `50.00` for the `price` column), you can use the `ALTER TABLE` statement.
+
+### Steps to Add the Constraints:
+
+1. **Make `product_id` a Primary Key**: The `product_id` column should be the primary key, meaning each value in this column must be unique and not `NULL`.
+2. **Set a Default Value for `price`**: The `price` column should automatically have a default value of `50.00` if no value is provided when inserting a new record.
+
+Explanation:
+- `ALTER TABLE products`: Specifies the table to modify.
+- `ADD CONSTRAINT pk_product_id`: Adds a constraint called `pk_product_id` to the table.
+- `PRIMARY KEY (product_id)`: Makes the `product_id` column the primary key.
+
+Explanation:
+- `ALTER TABLE products`: Specifies the table to modify.
+- `ALTER COLUMN price`: Indicates that you are modifying the `price` column.
+- `SET DEFAULT 50.00`: Sets the default value of the `price` column to `50.00`.
+
+These SQL commands will:
+- Ensure that the `product_id` is unique and non-null by making it the primary key.
+- Ensure that the `price` will default to `50.00` when no value is provided during an insert operation.
